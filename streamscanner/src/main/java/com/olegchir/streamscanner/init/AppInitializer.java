@@ -22,13 +22,17 @@ public class AppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
 
-        //Create webapp context, register dispatchers in filter chain, attach it to current servlet context
+        //Create webapp context
         AnnotationConfigWebApplicationContext root = new AnnotationConfigWebApplicationContext(); //part of spring-web
         root.register(SpringSecurityConfiguration.class); //register class by annotation. Here be all security rules.
+
+        //Register DelegatingFilterProxy
         FilterRegistration.Dynamic springSecurityFilterChainReg = servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
         springSecurityFilterChainReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.ERROR, DispatcherType.REQUEST), false, "/*");
+
         servletContext.addListener(new ContextLoaderListener(root));
 
+        //Register WicketFilter
         WicketFilter wicketFilter = new WicketFilter(new WicketApplication()) {
             @Override
             public void init(boolean isServlet, FilterConfig filterConfig) throws ServletException {

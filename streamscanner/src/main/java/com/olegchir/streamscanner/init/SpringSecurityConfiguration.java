@@ -14,8 +14,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 /**
- * @author Jochen Mader
+ * Created by olegchir on 25.12.14.
  */
 @Configuration
 @EnableWebSecurity
@@ -23,15 +26,23 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/favicon.ico")
-                .permitAll()
-                .antMatchers("/**")
-                .hasRole("USER")
-                .and()
-                .formLogin()
+            .addFilterAfter(new CsrfTokenFilter(), CsrfFilter.class)
+            .formLogin()
                 .loginPage("/login")
-                .permitAll();
+                .permitAll()
+                .and()
+            .logout()
+                .deleteCookies("remove")
+                .invalidateHttpSession(true)
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/logout_success")
+                //http://stackoverflow.com/questions/24108585/spring-security-java-config-not-generating-logout-url
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and()
+            .authorizeRequests()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/logout_success").permitAll()
+                .antMatchers("/**").hasRole("USER");
     }
 
     @Override

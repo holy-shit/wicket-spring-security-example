@@ -2,13 +2,16 @@
 <html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 <head>
     <meta charset="utf-8">
+    <meta name="_csrf" content="${_csrf.token}" />
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
     <title>Form based Login for Spring Security</title>
 </head>
 <body>
 <form method="POST">
     <input type="text" id="username" name="username"/>
     <input type="password" id="password" name="password"/>
-    <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="submit"/>
 </form>
 </body>

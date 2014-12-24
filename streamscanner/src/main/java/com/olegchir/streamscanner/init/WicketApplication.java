@@ -5,7 +5,8 @@ package com.olegchir.streamscanner.init;
  * see LICENSE-2.0.txt, LICENSE (it's a copy of LICENSE-2.0.txt) and NOTICE for additional information.
  */
 import com.olegchir.streamscanner.page.HomePage;
-import com.olegchir.streamscanner.page.SignInPage;
+import com.olegchir.streamscanner.page.LoginPage;
+import com.olegchir.streamscanner.page.LogoutSuccessPage;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
@@ -36,7 +37,8 @@ public class WicketApplication extends AuthenticatedWebApplication  {
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
         getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
         mountPage("/home", HomePage.class);
-        mountPage("/login", SignInPage.class);
+        mountPage("/login", LoginPage.class);
+        mountPage("/logout_success", LogoutSuccessPage.class);
     }
 
     @Override
@@ -46,6 +48,6 @@ public class WicketApplication extends AuthenticatedWebApplication  {
 
     @Override
     protected Class<? extends WebPage> getSignInPageClass() {
-        return SignInPage.class;
+        return LoginPage.class;
     }
 }

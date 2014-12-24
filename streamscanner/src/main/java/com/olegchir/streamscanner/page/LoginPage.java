@@ -11,5 +11,5 @@ import org.apache.wicket.markup.html.WebPage;
 /**
  * Created by olegchir on 25.12.14.
  */
-public class SignInPage extends WebPage {
+public class LoginPage extends WebPage {
 }
