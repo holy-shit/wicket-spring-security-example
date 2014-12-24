@@ -1,4 +1,4 @@
-package com.olegchir.streamscanner;
+package com.olegchir.streamscanner.init;
 /**
  * Copyright (C) 2014 Oleg Chirukhin
  * Licensed under the Apache License 2.0,

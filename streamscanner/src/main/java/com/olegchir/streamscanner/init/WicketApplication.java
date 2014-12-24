@@ -1,4 +1,4 @@
-package com.olegchir.streamscanner;
+package com.olegchir.streamscanner.init;
 /**
  * Copyright (C) 2014 Oleg Chirukhin
  * Licensed under the Apache License 2.0,
@@ -6,7 +6,6 @@ package com.olegchir.streamscanner;
  */
 import com.olegchir.streamscanner.page.HomePage;
 import com.olegchir.streamscanner.page.SignInPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;

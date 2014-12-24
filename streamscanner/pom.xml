@@ -154,6 +154,9 @@
             <!--host>localhost</host-->
             <port>9999</port> <!--Don't interfere with something on 8080-->
           </httpConnector>
+          <webApp>
+            <contextPath>/</contextPath>
+          </webApp>
         </configuration>
       </plugin>
     </plugins>

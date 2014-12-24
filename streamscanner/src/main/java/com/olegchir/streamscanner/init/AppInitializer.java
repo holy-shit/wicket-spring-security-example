@@ -5,7 +5,6 @@ package com.olegchir.streamscanner.init;
  * see LICENSE-2.0.txt, LICENSE (it's a copy of LICENSE-2.0.txt) and NOTICE for additional information.
  */
 
-import com.olegchir.streamscanner.WicketApplication;
 import org.apache.wicket.protocol.http.WicketFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
