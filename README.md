@@ -5,6 +5,7 @@ Wicket SpringSecurity Example
 
 1. mvn clean install
 2. mvn jetty:run
+3. открыть в браузере http://localhost:9999
 
 ###Зачем
 
