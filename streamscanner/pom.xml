@@ -9,17 +9,27 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <jettyVersion>9.2.5.v20141112</jettyVersion>
+    <!--Explicitly target to Java 8-->
+    <java.version>1.8</java.version>
+
+    <!--Versions of software in dependencies-->
+
+    <jetty.version>9.2.5.v20141112</jetty.version>
     <jetty.port>9999</jetty.port>
+    <wicket.version>6.18.0</wicket.version>
+    <spring.version>4.1.3.RELEASE</spring.version>
+    <spring.security.version>3.2.5.RELEASE</spring.security.version>
+    <log4j.version>1.2.17</log4j.version>
+    <log4j.slf4j.version>1.7.5</log4j.slf4j.version>
+    <junit.version>4.11</junit.version>
+
   </properties>
 
 
   <dependencies>
-    <dependency>
-      <groupId>org.apache.wicket</groupId>
-      <artifactId>wicket-core</artifactId>
-      <version>6.18.0</version>
-    </dependency>
+
+    <!--Web container (Jetty to save RAM on a server)-->
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -29,14 +39,108 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
-      <version>${jettyVersion}</version>
+      <version>${jetty.version}</version>
     </dependency>
+
+    <!--Wicket-->
+
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-core</artifactId>
+      <version>${wicket.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-auth-roles</artifactId>
+      <version>${wicket.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-spring</artifactId>
+      <version>${wicket.version}</version>
+    </dependency>
+
+    <!--Spring-->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+      <exclusions>
+        <!--Use slf4j instead of commons-logging, force it-->
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring Security -->
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+
+    <!--Logging-->
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${log4j.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${log4j.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${log4j.slf4j.version}</version>
+    </dependency>
+
+    <!--Testing-->
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -44,20 +148,24 @@
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>${jettyVersion}</version>
+        <version>${jetty.version}</version>
         <configuration>
           <httpConnector>
             <!--host>localhost</host-->
-            <port>9999</port>
+            <port>9999</port> <!--Don't interfere with something on 8080-->
           </httpConnector>
         </configuration>
       </plugin>
     </plugins>
+
     <resources>
       <resource>
         <filtering>false</filtering>
         <directory>src/main/resources</directory>
       </resource>
+
+      <!--Keep resources like Wicket HTML files alongside with classes-->
+
       <resource>
         <filtering>false</filtering>
         <directory>src/main/java</directory>
@@ -69,6 +177,7 @@
         </excludes>
       </resource>
     </resources>
+
   </build>
 
 </project>

@@ -4,12 +4,19 @@ package com.olegchir.streamscanner;
  * Licensed under the Apache License 2.0,
  * see LICENSE-2.0.txt, LICENSE (it's a copy of LICENSE-2.0.txt) and NOTICE for additional information.
  */
+import com.olegchir.streamscanner.page.HomePage;
+import com.olegchir.streamscanner.page.SignInPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 /**
  * Created by olegchir on 24.12.14.
  */
-public class WicketApplication extends WebApplication {
+public class WicketApplication extends AuthenticatedWebApplication  {
     public WicketApplication() {
     }
 
@@ -18,6 +25,28 @@ public class WicketApplication extends WebApplication {
      */
     @Override
     public Class getHomePage() {
-        return IndexPage.class;
+        return HomePage.class;
+    }
+
+    /**
+     * @see org.apache.wicket.Application#init()
+     */
+    @Override
+    public void init() {
+        super.init();
+        getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+        getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
+        mountPage("/home", HomePage.class);
+        mountPage("/login", SignInPage.class);
+    }
+
+    @Override
+    protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+        return UserAuthenticatedWebSession.class;
+    }
+
+    @Override
+    protected Class<? extends WebPage> getSignInPageClass() {
+        return SignInPage.class;
     }
 }
