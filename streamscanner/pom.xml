@@ -3,15 +3,33 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.olegchir.streamscanner</groupId>
   <artifactId>streamscanner</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>streamscanner</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <jettyVersion>9.3.0.M1</jettyVersion>
+    <jetty.port>9999</jetty.port>
+  </properties>
+
+
   <dependencies>
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-project</artifactId>
-      <version>9.2.6.v20141205</version>
+      <artifactId>jetty-server</artifactId>
+      <version>${jettyVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-maven-plugin</artifactId>
+      <version>${jettyVersion}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -20,4 +38,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jettyVersion}</version>
+        <configuration>
+          <httpConnector>
+            <!--host>localhost</host-->
+            <port>9999</port>
+          </httpConnector>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
