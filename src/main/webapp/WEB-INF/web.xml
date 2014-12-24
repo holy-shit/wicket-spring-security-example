@@ -17,7 +17,7 @@
         <!--<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>-->
         <!--<init-param>-->
             <!--<param-name>applicationClassName</param-name>-->
-            <!--<param-value>com.olegchir.streamscanner.init.WicketApplication</param-value>-->
+            <!--<param-value>com.olegchir.wicket_spring_security_example_security_example.init.WicketApplication</param-value>-->
         <!--</init-param>-->
     <!--</filter>-->
     <!--<filter-mapping>-->

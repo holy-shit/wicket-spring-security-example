@@ -1,12 +1,12 @@
-package com.olegchir.streamscanner.init;
+package com.olegchir.wicket_spring_security_example.init;
 /**
  * Copyright (C) 2014 Oleg Chirukhin
  * Licensed under the Apache License 2.0,
  * see LICENSE-2.0.txt, LICENSE (it's a copy of LICENSE-2.0.txt) and NOTICE for additional information.
  */
-import com.olegchir.streamscanner.page.HomePage;
-import com.olegchir.streamscanner.page.LoginPage;
-import com.olegchir.streamscanner.page.LogoutSuccessPage;
+import com.olegchir.wicket_spring_security_example.page.HomePage;
+import com.olegchir.wicket_spring_security_example.page.LoginPage;
+import com.olegchir.wicket_spring_security_example.page.LogoutSuccessPage;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;

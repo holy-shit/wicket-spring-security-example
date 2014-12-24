@@ -1,4 +1,4 @@
-package com.olegchir.streamscanner;
+package com.olegchir.wicket_spring_security_example;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

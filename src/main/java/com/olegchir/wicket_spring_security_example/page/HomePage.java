@@ -1,4 +1,4 @@
-package com.olegchir.streamscanner.page;
+package com.olegchir.wicket_spring_security_example.page;
 /**
  * Copyright (C) 2014 Oleg Chirukhin
  * Licensed under the Apache License 2.0,
@@ -7,7 +7,6 @@ package com.olegchir.streamscanner.page;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
 
 /**
  * Created by olegchir on 24.12.14.
