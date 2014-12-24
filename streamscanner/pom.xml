@@ -9,12 +9,17 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <jettyVersion>9.3.0.M1</jettyVersion>
+    <jettyVersion>9.2.5.v20141112</jettyVersion>
     <jetty.port>9999</jetty.port>
   </properties>
 
 
   <dependencies>
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-core</artifactId>
+      <version>6.18.0</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -24,11 +29,6 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
-      <version>${jettyVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-maven-plugin</artifactId>
       <version>${jettyVersion}</version>
     </dependency>
     <dependency>
@@ -53,6 +53,22 @@
         </configuration>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <filtering>false</filtering>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
   </build>
 
 </project>
